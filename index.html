@@ -275,7 +275,7 @@
             <option value="">Seleccione un prospecto</option>
             <option value="1">Prospecto A</option>
             <option value="2">Prospecto B</option>
-            <option value="3">Prospecto C</option>
+            <option value="3">Prospecto C</option>btnPresupuestoGeneral
           </select>
           
           <!-- Campos nuevos -->
@@ -1068,18 +1068,41 @@
       }
       
       /********* Manejo de la pantalla de selección *********/
+      // document.getElementById("btnPresupuestoGeneral").addEventListener("click", function() {
+      //   document.getElementById("landingPage").classList.add("hidden");
+      //   document.getElementById("formGeneral").classList.remove("hidden");
+      //   genCurrentStep = 1;
+      //   showStep('gen', genCurrentStep);
+      // });
+      // document.getElementById("btnPresupuestoSector").addEventListener("click", function() {
+      //   document.getElementById("landingPage").classList.add("hidden");
+      //   document.getElementById("formSector").classList.remove("hidden");
+      //   secCurrentStep = 1;
+      //   showStep('sec', secCurrentStep);
+      // });
       document.getElementById("btnPresupuestoGeneral").addEventListener("click", function() {
-        document.getElementById("landingPage").classList.add("hidden");
-        document.getElementById("formGeneral").classList.remove("hidden");
-        genCurrentStep = 1;
-        showStep('gen', genCurrentStep);
-      });
-      document.getElementById("btnPresupuestoSector").addEventListener("click", function() {
-        document.getElementById("landingPage").classList.add("hidden");
-        document.getElementById("formSector").classList.remove("hidden");
-        secCurrentStep = 1;
-        showStep('sec', secCurrentStep);
-      });
+      // Remueve completamente la pantalla inicial
+      const landing = document.getElementById("landingPage");
+      if (landing) {
+        landing.remove();
+      }
+      // Muestra el formulario de Presupuesto General
+      document.getElementById("formGeneral").style.display = "block";
+      genCurrentStep = 1;
+      showStep('gen', genCurrentStep);
+    });
+
+    document.getElementById("btnPresupuestoSector").addEventListener("click", function() {
+      // Remueve completamente la pantalla inicial
+      const landing = document.getElementById("landingPage");
+      if (landing) {
+        landing.remove();
+      }
+      // Muestra el formulario de Presupuesto por Sector
+      document.getElementById("formSector").style.display = "block";
+      secCurrentStep = 1;
+      showStep('sec', secCurrentStep);
+    });
       
       /********* Manejadores de envío (simulación) *********/
       document.getElementById("wizardGeneral").addEventListener("submit", function(e) {
