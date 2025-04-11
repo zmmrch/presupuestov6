@@ -406,8 +406,8 @@
         <!-- Botones de navegación para Formulario General -->
         <div class="button-group">
           <button type="button" class="btn" onclick="prevStep('gen')">Anterior</button>
-          <button type="button" class="btn" onclick="nextStep('gen')">Siguiente</button>
-          <button type="submit" class="btn">Guardar presupuesto general</button>
+          <button type="button" class="btn" id="genNextBtn" onclick="nextStep('gen')">Siguiente</button>
+          <button type="submit" class="btn" id="genSubmitBtn" style="display: none;">Guardar presupuesto general</button>
         </div>
       </form>
     </div>
@@ -550,8 +550,8 @@
         <!-- Botones de navegación para Formulario Sector -->
         <div class="button-group">
           <button type="button" class="btn" onclick="prevStep('sec')">Anterior</button>
-          <button type="button" class="btn" onclick="nextStep('sec')">Siguiente</button>
-          <button type="submit" class="btn">Guardar presupuesto por sector</button>
+          <button type="button" class="btn" id="secNextBtn" onclick="nextStep('sec')">Siguiente</button>
+          <button type="submit" class="btn" id="secSubmitBtn" style="display: none;">Guardar presupuesto por sector</button>
         </div>
       </form>
     </div>
@@ -590,7 +590,31 @@
         for (let i = 0; i < items.length; i++) {
           items[i].classList.toggle("active", i < step);
         }
+        
+        // Si es el último step, deshabilitar "Siguiente" y mostrar "Guardar"
+        if(prefix === 'gen') {
+          if(genCurrentStep === totalGenSteps){
+            document.getElementById("genNextBtn").disabled = true;
+            document.getElementById("genNextBtn").style.backgroundColor = "#ccc";
+            document.getElementById("genSubmitBtn").style.display = "inline-block";
+          } else {
+            document.getElementById("genNextBtn").disabled = false;
+            document.getElementById("genNextBtn").style.backgroundColor = "#69b6b1";
+            document.getElementById("genSubmitBtn").style.display = "none";
+          }
+        } else if(prefix === 'sec') {
+          if(secCurrentStep === totalSecSteps){
+            document.getElementById("secNextBtn").disabled = true;
+            document.getElementById("secNextBtn").style.backgroundColor = "#ccc";
+            document.getElementById("secSubmitBtn").style.display = "inline-block";
+          } else {
+            document.getElementById("secNextBtn").disabled = false;
+            document.getElementById("secNextBtn").style.backgroundColor = "#69b6b1";
+            document.getElementById("secSubmitBtn").style.display = "none";
+          }
+        }
       }
+
       
       function nextStep(prefix) {
         if (prefix === 'gen' && genCurrentStep < totalGenSteps) {
